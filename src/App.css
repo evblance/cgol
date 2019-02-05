@@ -10,6 +10,10 @@
     --textFont: 'Oswald', sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     background: var(--backgroundColour);
