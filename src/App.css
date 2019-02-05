@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|ZCOOL+KuaiLe');
+
 :root {
     --primaryColour: #97ffba;
     --secondaryColour: #ff332a;
     --backgroundColour: rgb(36, 58, 40);
+    --boardWidth: 800px;
+    --boardHeight: 400px;
+    --headingFont: 'ZCOOL KuaiLe', sans-serif;
+    --textFont: 'Oswald', sans-serif;
 }
 
 html,
