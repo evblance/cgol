@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Gameboard from './components/Gameboard';
 import './App.css';
 import styled from 'styled-components'
