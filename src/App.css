@@ -1,6 +1,12 @@
+:root {
+    --primaryColour: #97ffba;
+    --secondaryColour: #ff332a;
+    --backgroundColour: rgb(36, 58, 40);
+}
+
 html,
 body {
-    background: rgb(36, 58, 40);
+    background: var(--backgroundColour);
     margin: 0;
     padding: 0;
 }
