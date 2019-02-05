@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-interface CellComponentProps {
+interface CellProps {
     sizeX: number,
     sizeY: number
 }
 
-interface CellComponentState {
+interface CellState {
     alive: boolean
 }
 
-class Cell extends Component<CellComponentProps, CellComponentState> {
+class Cell extends Component<CellProps, CellState> {
 
-    constructor(props: CellComponentProps) {
+    constructor(props: CellProps) {
         super(props);
         this.state = {
             alive: false
