@@ -25,6 +25,7 @@ class Gameboard extends Component<GameboardProps, GameboardState> {
                     numCellsY={10}
                     generationInterval={50}
                     shouldEvolve={this.props.gameState === EGameState.STARTED ? true : false}
+                    deadGrid={this.props.gameState === EGameState.STOPPED ? true: false}
                 />
             </GameboardWrapper>
         )

@@ -15,7 +15,7 @@ class App extends Component<any, AppState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            gameState: EGameState.STOPPED,
+            gameState: EGameState.STARTED,
         }
         this.handleCtrlBtnPress = this.handleCtrlBtnPress.bind(this);
     }
@@ -30,8 +30,10 @@ class App extends Component<any, AppState> {
             case (EButtonControlType.ACTUATOR):
                 if (currentGameState === EGameState.STOPPED) {
                     nextGameState = EGameState.STARTED;
-                } else if (currentGameState === EGameState.STARTED) {
-                    nextGameState = EGameState.STOPPED;
+                } else if (currentGameState === EGameState.PAUSED) {
+                    nextGameState = EGameState.STARTED;   
+                }else if (currentGameState === EGameState.STARTED) {
+                    nextGameState = EGameState.PAUSED;
                 }
                 break;
             case (EButtonControlType.ARRESTOR):

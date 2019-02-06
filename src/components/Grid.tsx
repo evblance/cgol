@@ -8,6 +8,7 @@ interface GridProps {
     numCellsY: number,
     generationInterval: number,
     shouldEvolve: boolean,
+    deadGrid: boolean,
 }
 
 interface GridState {
@@ -39,6 +40,13 @@ class Grid extends Component<GridProps, GridState> {
 
     componentWillReceiveProps(nextProps: GridProps) {
         console.log(nextProps);
+        if (nextProps.deadGrid) {
+            this.clearCells();
+            this.setState({
+                ...this.state,
+                generation: 0,
+            });
+        }
     }
 
     evolve(): void {
@@ -130,7 +138,13 @@ class Grid extends Component<GridProps, GridState> {
     }
 
     clearCells(): void {
+        const cellData: CellProps[] = this.state.cellData;
+        cellData.forEach(cell => cell.alive = false);
 
+        this.setState({
+            ...this.state,
+            cellData,
+        });
     }
 
     render() {
