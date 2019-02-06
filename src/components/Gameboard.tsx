@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Grid from '../components/Grid'
 import styled from 'styled-components';
+
 
 class Gameboard extends Component {
 
@@ -14,7 +16,9 @@ class Gameboard extends Component {
 
     render() {
         return (
-            <GameboardWrapper />
+            <GameboardWrapper>
+                <Grid />
+            </GameboardWrapper>
         )
     }
 }
