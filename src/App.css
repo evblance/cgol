@@ -7,9 +7,12 @@
     --boardWidth: 800px;
     --boardHeight: 400px;
     --headingFont: 'ZCOOL KuaiLe', sans-serif;
+    --displayFont: var(--headingFont);
     --buttonFont: 'Oswald', sans-serif;
     --buttonWidth: 100px;
     --buttonHeight: 35px;
+    --displayHeight: 40px;
+    --displayWidth: var(--boardWidth);
 }
 
 * {
