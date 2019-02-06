@@ -4,7 +4,22 @@ import ControlPanel from './components/ControlPanel';
 import './App.css';
 import styled from 'styled-components'
 
+enum EGameState {
+    STARTED,
+    PAUSED,
+    STOPPED,
+}
+
 class App extends Component {
+
+    componentDidMount() {
+        this.startGame();
+    }
+
+    startGame() {
+        // TODO
+    }
+
     render() {
         return (
             <React.Fragment>   
