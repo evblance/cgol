@@ -20,14 +20,6 @@ class App extends Component<any, AppState> {
         this.handleCtrlBtnPress = this.handleCtrlBtnPress.bind(this);
     }
 
-    componentDidMount() {
-        this.startGame();
-    }
-
-    startGame(): void {
-        // TODO
-    }
-
     handleCtrlBtnPress(controlType: EButtonControlType): void {
         // TODO: Change to decision based on current gameState
         console.log(controlType);
@@ -45,6 +37,10 @@ class App extends Component<any, AppState> {
             case (EButtonControlType.ARRESTOR):
                 nextGameState = EGameState.STOPPED;
                 // TODO: Communicate with child component to blank out the grid
+                break;
+            case (EButtonControlType.RESTARTER):
+                document.location.reload();
+                break;
             default:
                 break;
         }

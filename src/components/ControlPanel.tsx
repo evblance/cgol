@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from './Button';
-import { FaPlay, FaPause, FaStop } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStop, FaRedo } from 'react-icons/fa';
 import { EButtonControlType } from '../enums/button-control-type.enum';
 import styled from 'styled-components';
 
@@ -33,7 +33,10 @@ class ControlPanel extends Component<ControlPanelProps, ControlPanelState> {
                     <FaPlay /> <FaPause />
                 </Button>
                 <Button controlType={EButtonControlType.ARRESTOR} onPress={this.handleButtonPress}>
-                    <FaStop />
+                    Clear
+                </Button>
+                <Button controlType={EButtonControlType.RESTARTER} onPress={this.handleButtonPress}>
+                    <FaRedo />
                 </Button>
             </ControlPanelWrapper>
         )
