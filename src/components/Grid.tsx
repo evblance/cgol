@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cell, { CellProps, CellPosition } from '../components/Cell';
+import Cell, { CellProps, CellPosition } from './Cell';
 import styled from 'styled-components';
 import uuidv4 from 'uuid';
 
@@ -7,10 +7,10 @@ interface GridProps {
     numCellsX: number,
     numCellsY: number,
     generationInterval: number,
+    shouldEvolve: boolean,
 }
 
 interface GridState {
-    shouldEvolve: boolean,
     generation: number,
     cellData: CellProps[],
 }
@@ -20,7 +20,6 @@ class Grid extends Component<GridProps, GridState> {
     constructor(props: GridProps) {
         super(props);
         this.state = {
-            shouldEvolve: true,
             generation: 0,
             cellData: new Array<CellProps>(),
         }
@@ -36,6 +35,10 @@ class Grid extends Component<GridProps, GridState> {
 
     componentWillUnmount() {
         clearInterval(this.timer);
+    }
+
+    componentWillReceiveProps(nextProps: GridProps) {
+        console.log(nextProps);
     }
 
     evolve(): void {
@@ -88,7 +91,7 @@ class Grid extends Component<GridProps, GridState> {
     }
 
     tickGeneration(): any {
-        if (this.state.shouldEvolve) {
+        if (this.props.shouldEvolve) {
             const nextGeneration = this.state.generation + 1;
             this.setState({
                 ...this.state,

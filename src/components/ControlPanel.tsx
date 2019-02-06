@@ -4,9 +4,8 @@ import { FaPlay, FaPause, FaStop } from 'react-icons/fa';
 import { EButtonControlType } from '../enums/button-control-type.enum';
 import styled from 'styled-components';
 
-
 interface ControlPanelProps {
-
+    onControlButtonPress: Function,
 }
 
 interface ControlPanelState {
@@ -20,10 +19,11 @@ class ControlPanel extends Component<ControlPanelProps, ControlPanelState> {
         this.state = {
 
         }
+        this.handleButtonPress = this.handleButtonPress.bind(this);
     }
 
     handleButtonPress(controlType: EButtonControlType): void {
-        console.log(controlType);
+        this.props.onControlButtonPress(controlType);
     }
 
     render() {

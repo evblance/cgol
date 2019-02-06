@@ -1,31 +1,66 @@
 import React, { Component } from 'react';
 import Gameboard from './components/Gameboard';
 import ControlPanel from './components/ControlPanel';
-import './App.css';
+import { EButtonControlType } from './enums/button-control-type.enum'
+import { EGameState } from './enums/game-state.enum';
 import styled from 'styled-components'
+import './App.css';
 
-enum EGameState {
-    STARTED,
-    PAUSED,
-    STOPPED,
+interface AppState {
+    gameState: EGameState,
 }
 
-class App extends Component {
+class App extends Component<any, AppState> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            gameState: EGameState.STOPPED,
+        }
+        this.handleCtrlBtnPress = this.handleCtrlBtnPress.bind(this);
+    }
 
     componentDidMount() {
         this.startGame();
     }
 
-    startGame() {
+    startGame(): void {
         // TODO
+    }
+
+    handleCtrlBtnPress(controlType: EButtonControlType): void {
+        // TODO: Change to decision based on current gameState
+        console.log(controlType);
+
+        const { gameState: currentGameState } = this.state;
+        let nextGameState: EGameState = currentGameState;
+        switch (controlType) {
+            case (EButtonControlType.ACTUATOR):
+                if (currentGameState === EGameState.STOPPED) {
+                    nextGameState = EGameState.STARTED;
+                } else if (currentGameState === EGameState.STARTED) {
+                    nextGameState = EGameState.STOPPED;
+                }
+                break;
+            case (EButtonControlType.ARRESTOR):
+                nextGameState = EGameState.STOPPED;
+                // TODO: Communicate with child component to blank out the grid
+            default:
+                break;
+        }
+
+        this.setState({
+            ...this.state,
+            gameState: nextGameState,
+        });
     }
 
     render() {
         return (
             <React.Fragment>   
                 <AppTitle>Game of Life, by Conway</AppTitle>
-                <Gameboard />
-                <ControlPanel />
+                <Gameboard gameState={this.state.gameState} />
+                <ControlPanel onControlButtonPress={this.handleCtrlBtnPress}/>
             </React.Fragment>
         );
     }

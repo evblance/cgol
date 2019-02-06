@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { EButtonControlType } from '../enums/button-control-type.enum';
+import styled from 'styled-components';
 
 interface ButtonProps {
     onPress: Function,

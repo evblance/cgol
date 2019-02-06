@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Grid from '../components/Grid';
+import Grid from './Grid';
+import { EGameState } from '../enums/game-state.enum';
 import styled from 'styled-components';
 
 interface GameboardProps {
-
+    gameState: EGameState,
 }
 
 interface GameboardState {
@@ -19,7 +20,12 @@ class Gameboard extends Component<GameboardProps, GameboardState> {
     render() {
         return (
             <GameboardWrapper>
-                <Grid numCellsX={20} numCellsY={10} generationInterval={50} />
+                <Grid
+                    numCellsX={20}
+                    numCellsY={10}
+                    generationInterval={50}
+                    shouldEvolve={this.props.gameState === EGameState.STARTED ? true : false}
+                />
             </GameboardWrapper>
         )
     }
