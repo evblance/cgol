@@ -21,8 +21,6 @@ class App extends Component<any, AppState> {
     }
 
     handleCtrlBtnPress(controlType: EButtonControlType): void {
-        // TODO: Change to decision based on current gameState
-        console.log(controlType);
 
         const { gameState: currentGameState } = this.state;
         let nextGameState: EGameState = currentGameState;
