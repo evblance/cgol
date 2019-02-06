@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import Grid from '../components/Grid'
+import Grid from '../components/Grid';
 import styled from 'styled-components';
 
+interface GameboardProps {
 
-class Gameboard extends Component {
+}
 
-    constructor(props: any) {
+interface GameboardState {
+
+}
+
+class Gameboard extends Component<GameboardProps, GameboardState> {
+
+    constructor(props: GameboardProps) {
         super(props);
-        this.generateGrid = this.generateGrid.bind(this);
-    }
-
-    generateGrid(): void {
-
     }
 
     render() {
         return (
             <GameboardWrapper>
-                <Grid />
+                <Grid numCellsX={20} numCellsY={10} generationInterval={50} />
             </GameboardWrapper>
         )
     }
@@ -26,8 +28,10 @@ class Gameboard extends Component {
 export default Gameboard;
 
 const GameboardWrapper = styled.div`
+    box-sizing: content-box;
     border: 1px solid var(--primaryColour);
     height: var(--boardHeight);
     margin: 0 auto;
+    padding: 0;
     width: var(--boardWidth);
 `
