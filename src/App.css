@@ -7,7 +7,9 @@
     --boardWidth: 800px;
     --boardHeight: 400px;
     --headingFont: 'ZCOOL KuaiLe', sans-serif;
-    --textFont: 'Oswald', sans-serif;
+    --buttonFont: 'Oswald', sans-serif;
+    --buttonWidth: 100px;
+    --buttonHeight: 35px;
 }
 
 * {
