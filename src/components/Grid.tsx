@@ -25,6 +25,8 @@ class Grid extends Component<GridProps, GridState> {
             cellData: new Array<CellProps>(),
         }
         this.renderCells = this.renderCells.bind(this);
+        this.handleUserCellActivate = this.handleUserCellActivate.bind(this);
+        this.handleUserCellKill = this.handleUserCellKill.bind(this);
     }
 
     timer: any = undefined;
@@ -39,7 +41,6 @@ class Grid extends Component<GridProps, GridState> {
     }
 
     componentWillReceiveProps(nextProps: GridProps) {
-        console.log(nextProps);
         if (nextProps.deadGrid) {
             this.clearCells();
             this.setState({
@@ -122,6 +123,8 @@ class Grid extends Component<GridProps, GridState> {
                     sizeY: cellHeight,
                     position: { x: x % numCellsX, y: y % numCellsY },
                     alive: Math.random() > 0.7 ? true : false,
+                    onUserCellActivate: this.handleUserCellActivate,
+                    onUserCellKill: this.handleUserCellKill,
                 });
             }
         }
@@ -134,7 +137,19 @@ class Grid extends Component<GridProps, GridState> {
 
     renderCells(): any {
         return this.state.cellData
-            .map(_ => <Cell key={uuidv4()} position={_.position} sizeX={_.sizeX} sizeY={_.sizeY} alive={_.alive} />);
+            .map((cell) => {
+                return (
+                    <Cell
+                        key={uuidv4()}
+                        position={cell.position}
+                        sizeX={cell.sizeX}
+                        sizeY={cell.sizeY}
+                        alive={cell.alive}
+                        onUserCellActivate={this.handleUserCellActivate}
+                        onUserCellKill={this.handleUserCellKill}
+                    />
+                );
+            }); 
     }
 
     clearCells(): void {
@@ -146,6 +161,45 @@ class Grid extends Component<GridProps, GridState> {
             cellData,
         });
     }
+
+    getTargetCellCoords(event: any, cellWidth: number, cellHeight: number): CellPosition {
+        const gameboard: HTMLElement | null = document.getElementById('gameboard');
+        if (gameboard) {
+            const gameboardClientRect: any = gameboard.getBoundingClientRect();
+            const transformedX = event.clientX - gameboardClientRect.left;
+            const transformedY = event.clientY - gameboardClientRect.top;
+            return { x: Math.floor(transformedX / cellWidth), y: Math.floor(transformedY / cellHeight) };
+        } else {
+            return { x: NaN, y: NaN };
+        }
+    }
+
+    handleUserCellActivate(event: any, cellWidth: number, cellHeight: number) {
+        const targetCellCoords = this.getTargetCellCoords(event, cellWidth, cellHeight);
+        const state = this.state;
+        const { cellData } = state;
+        cellData.forEach((cell) => {
+            if (JSON.stringify(cell.position) === JSON.stringify(targetCellCoords)) {
+                cell.alive = true;
+                this.setState(state);
+                return;
+            }
+        });
+    }
+
+    handleUserCellKill(event: any, cellWidth: number, cellHeight: number) {
+        const targetCellCoords = this.getTargetCellCoords(event, cellWidth, cellHeight);
+        const state = this.state;
+        const { cellData } = state;
+        cellData.forEach((cell) => {
+            if (JSON.stringify(cell.position) === JSON.stringify(targetCellCoords)) {
+                cell.alive = false;
+                this.setState(state);
+                return;
+            }
+        });
+    }
+
 
     render() {
         return (

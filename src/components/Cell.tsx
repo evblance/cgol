@@ -6,6 +6,8 @@ export interface CellProps {
     sizeY: number,
     position: CellPosition,
     alive: boolean,
+    onUserCellActivate: Function,
+    onUserCellKill: Function,
 }
 
 export interface CellPosition {
@@ -23,13 +25,14 @@ class Cell extends Component<CellProps, any> {
 
     activate(event: any): void {
         event.preventDefault();
-        // TODO: Announce cell activation to parent grid
+        this.props.onUserCellActivate(event, this.props.sizeX, this.props.sizeY);
     }
 
     kill(event: any): void {
         event.preventDefault();
-        // TODO: Announce cell death to parent grid
+        this.props.onUserCellKill(event, this.props.sizeX, this.props.sizeY);
     }
+
 
     render() {
         return (

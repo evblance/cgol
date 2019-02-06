@@ -19,7 +19,7 @@ class Gameboard extends Component<GameboardProps, GameboardState> {
 
     render() {
         return (
-            <GameboardWrapper>
+            <GameboardWrapper id="gameboard">
                 <Grid
                     numCellsX={20}
                     numCellsY={10}
