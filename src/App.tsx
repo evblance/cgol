@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Gameboard from './components/Gameboard';
+import ControlPanel from './components/ControlPanel';
 import './App.css';
 import styled from 'styled-components'
 
@@ -9,6 +10,7 @@ class App extends Component {
             <React.Fragment>   
                 <AppTitle>Game of Life, by Conway</AppTitle>
                 <Gameboard />
+                <ControlPanel />
             </React.Fragment>
         );
     }
