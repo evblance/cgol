@@ -1,8 +1,10 @@
-import React, { Component, MouseEventHandler } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import { EButtonControlType } from '../enums/button-control-type.enum';
 
 interface ButtonProps {
-    onPress: Function
+    onPress: Function,
+    controlType: EButtonControlType,
 }
 
 interface ButtonState {
@@ -20,7 +22,7 @@ class Button extends Component<ButtonProps, ButtonState> {
     }
 
     onPress(): void {
-        this.props.onPress(event);
+        this.props.onPress(this.props.controlType);
     }
 
     render() {
@@ -37,14 +39,16 @@ export default Button;
 const ButtonContainer = styled.button`
     background: transparent;
     border: 1px solid var(--primaryColour);
-    font: 600 1rem var(--buttonFont);
-    width: var(--buttonWidth);
-    height: var(--buttonHeight);
     color: var(--primaryColour);
+    height: var(--buttonHeight);
+    font: 600 1rem var(--buttonFont);
+    outline: none;
     text-transform: uppercase;
-
+    width: var(--buttonWidth);
+    
     &:active {
-        transform: translate(1px, 1px);
         box-shadow: 1px 1px 3px 2px var(--backgroundColour);
+        opacity: 0.8;
+        transform: translate(1px, 1px);
     }
 `
