@@ -1,5 +1,5 @@
 export enum EGameState {
-    STARTED,
-    PAUSED,
-    STOPPED,
+    STARTED = 'running',
+    PAUSED = 'paused',
+    STOPPED = 'halted',
 }
