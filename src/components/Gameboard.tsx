@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 interface GameboardProps {
     gameState: EGameState,
+    onGenerationUpdate: Function,
 }
 
 interface GameboardState {
@@ -15,6 +16,11 @@ class Gameboard extends Component<GameboardProps, GameboardState> {
 
     constructor(props: GameboardProps) {
         super(props);
+        this.handleGenerationUpdate = this.handleGenerationUpdate.bind(this);
+    }
+
+    handleGenerationUpdate(generation: number): void {
+        this.props.onGenerationUpdate(generation);
     }
 
     render() {
@@ -23,9 +29,10 @@ class Gameboard extends Component<GameboardProps, GameboardState> {
                 <Grid
                     numCellsX={20}
                     numCellsY={10}
-                    generationInterval={50}
+                    generationInterval={250}
                     shouldEvolve={this.props.gameState === EGameState.STARTED ? true : false}
                     deadGrid={this.props.gameState === EGameState.STOPPED ? true: false}
+                    onGenerationUpdate={this.handleGenerationUpdate}
                 />
             </GameboardWrapper>
         )

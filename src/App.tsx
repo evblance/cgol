@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Gameboard from './components/Gameboard';
 import ControlPanel from './components/ControlPanel';
+import Display from './components/Display';
 import { EButtonControlType } from './enums/button-control-type.enum'
 import { EGameState } from './enums/game-state.enum';
 import styled from 'styled-components'
@@ -8,6 +9,7 @@ import './App.css';
 
 interface AppState {
     gameState: EGameState,
+    generation: number,
 }
 
 class App extends Component<any, AppState> {
@@ -16,8 +18,10 @@ class App extends Component<any, AppState> {
         super(props);
         this.state = {
             gameState: EGameState.STARTED,
+            generation: 0,
         }
         this.handleCtrlBtnPress = this.handleCtrlBtnPress.bind(this);
+        this.handleGenerationUpdate = this.handleGenerationUpdate.bind(this);
     }
 
     handleCtrlBtnPress(controlType: EButtonControlType): void {
@@ -51,11 +55,19 @@ class App extends Component<any, AppState> {
         });
     }
 
+    handleGenerationUpdate(generation: number): void {
+        this.setState({
+            ...this.state,
+            generation
+        });
+    }
+
     render() {
         return (
             <React.Fragment>   
                 <AppTitle>Game of Life, by Conway</AppTitle>
-                <Gameboard gameState={this.state.gameState} />
+                <Gameboard gameState={this.state.gameState} onGenerationUpdate={this.handleGenerationUpdate} />
+                <Display gameState={this.state.gameState} generation={this.state.generation} />
                 <ControlPanel onControlButtonPress={this.handleCtrlBtnPress}/>
             </React.Fragment>
         );

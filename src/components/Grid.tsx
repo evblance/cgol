@@ -9,6 +9,7 @@ interface GridProps {
     generationInterval: number,
     shouldEvolve: boolean,
     deadGrid: boolean,
+    onGenerationUpdate: Function,
 }
 
 interface GridState {
@@ -107,6 +108,7 @@ class Grid extends Component<GridProps, GridState> {
                 generation: nextGeneration,
             });
             this.evolve();
+            this.props.onGenerationUpdate(nextGeneration);
         }
     }
 
